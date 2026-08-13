@@ -8,4 +8,6 @@
 data/
 node_modules/
 .next/
-prisma/legacy-db.json
+
+# prisma/legacy-db.json is deliberately NOT ignored — the seed reads it to
+# populate the catalogue on a fresh database.

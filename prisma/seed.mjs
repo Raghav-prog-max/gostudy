@@ -55,7 +55,10 @@ async function main() {
   }
 
   if (!legacy) {
-    console.log("· no data/db.json found — schema seeded with admin only");
+    console.warn(
+      `! ${path.relative(process.cwd(), LEGACY)} not found — seeded the admin user only, ` +
+        "so the catalogue will be empty"
+    );
     return;
   }
 
