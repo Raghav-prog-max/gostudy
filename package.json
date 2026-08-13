@@ -2,6 +2,10 @@
   "name": "cooder-shop",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "//": "Prisma 7 refuses to install below 20.19; hosts default to older LTS without this",
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "prisma generate && next dev -p 3500",
     "build": "prisma generate && next build",
