@@ -32,10 +32,12 @@ if (missing.length) {
   process.exit(1);
 }
 
-if (process.env.DATABASE_URL.startsWith("file:")) {
+// Only serverless hosts genuinely cannot use a file database; on a host with a
+// mounted volume it is the intended setup.
+if (process.env.DATABASE_URL.startsWith("file:") && process.env.VERCEL) {
   console.error(
-    "\n  DATABASE_URL points at a local file. A serverless filesystem is discarded\n" +
-      "  between requests, so every write would be lost. Use a hosted Turso database.\n"
+    "\n  DATABASE_URL points at a local file. Vercel discards this between requests,\n" +
+      "  so every write would be lost. Use a hosted Turso database.\n"
   );
   process.exit(1);
 }
