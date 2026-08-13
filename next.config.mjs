@@ -1,10 +1,14 @@
-import path from "path";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // A package-lock.json in C:\Users\rishi makes Next infer the home dir as the root
+  // A package-lock.json in C:\Users\rishi makes Next infer the home dir as the
+  // root. fileURLToPath is required here: stripping the leading slash by hand
+  // works for Windows' /C:/… but turns a Linux path into a relative one, which
+  // Turbopack rejects.
   turbopack: {
-    root: path.dirname(new URL(import.meta.url).pathname.slice(1)),
+    root: path.dirname(fileURLToPath(import.meta.url)),
   },
 
   images: {
